@@ -1,23 +1,68 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 
+import { useState } from "react";
+
+import TextInput from "./components/inputs/TextInput";
+import Modal from "./components/modal/Modal";
 function App() {
+  const [title, setTitle] = useState();
+  const [tagline, setTagline] = useState();
+  const [body, setBody] = useState();
+  const [note, setNote] = useState();
+  const [notes, setNotes] = useState([]);
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const [showAddNotes, setShowAddNotes] = useState(false);
+
+  console.log(note);
+  // console.log(notes);
+  const handleAddNote = (event) => {
+    setNote(event.target.value);
+    setNotes(notes ? [...notes, note] : [note]);
+    // setShowAddNotes(false);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className="background-wrapper">
+      <div className="container">
+        <h1>Notes</h1>
+        {/* <div className="add-note-wrapper">
+          <div>
+            <input
+              type="text"
+              placeholder="Take a note..."
+              onBlur={(event) => {
+                handleAddNote(event);
+              }}
+              onClick={(e) => {
+                setShowAddNotes(true);
+              }}
+            />
+          </div>
+          {showAddNotes && (
+            <div>
+              
+              <TextInput
+                textValue={tagline}
+                setTextValue={setTagline}
+                placeholder="Tagline ..."
+                label="Tagline"
+              />
+              <div>
+                <textarea type="text" placeholder="tagline" />
+              </div>
+            </div>
+          )}
+        </div> */}
+        <button
+          onClick={() => {
+            setIsOpen(!isOpen);
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          Add Notes
+        </button>
+        <Modal open={isOpen}>Modal data</Modal>
+      </div>
     </div>
   );
 }
