@@ -1,9 +1,10 @@
 import "./App.css";
-
+import ReactDOM from "react-dom";
 import { useState } from "react";
 
 import TextInput from "./components/inputs/TextInput";
 import Modal from "./components/modal/Modal";
+
 function App() {
   const [title, setTitle] = useState();
   const [tagline, setTagline] = useState();
@@ -13,9 +14,11 @@ function App() {
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const domElement = document.getElementById("portal");
+
   const [showAddNotes, setShowAddNotes] = useState(false);
 
-  console.log(note);
+  // console.log(note);
   // console.log(notes);
   const handleAddNote = (event) => {
     setNote(event.target.value);
@@ -61,7 +64,13 @@ function App() {
         >
           Add Notes
         </button>
-        <Modal open={isOpen}>Modal data</Modal>
+        {ReactDOM.createPortal(
+          <Modal open={isOpen}>
+            Modal datadsdfasdfsdfsd fasd falsesdf showAddNotesfasd falseasd
+            falsedsf
+          </Modal>,
+          domElement
+        )}
       </div>
     </div>
   );
